@@ -3,3 +3,30 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.searchbar{
+   display: block;
+   margin: 20px auto;
+   width :400px; 
+   height: 30px;
+   padding: 5px;
+   font-size: 20px;
+   font-family: Arial, Helvetica, sans-serif;
+   border: 1px soloid #ccc;
+   border-radius: 10px;
+
+}
+.heading{
+  display: block;
+  margin: 5px auto;
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    width: 500px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+
+
+}

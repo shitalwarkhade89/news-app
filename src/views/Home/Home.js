@@ -5,35 +5,48 @@ import NewsArticle from "../../componets/NewsArticle/NewsArticle";
 
 function Home() {
     const [news, setNews] = useState([])
+    const [searchQury, setSearchQury] = useState("pune")
 
     const loadNews = async () => {
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=apple&from=2023-10-15&to=2023-10-15&sortBy=popularity&apiKey=2477dff7c9a54a599439423d03af1ba2`)
+        try {
 
-        setNews(response.data.articles)
-    }
+
+            const response = await axios.get(`https://newsapi.org/v2/everything?q=${searchQury}&from=2023-10-15&to=2023-10-15&sortBy=popularity&apiKey=2477dff7c9a54a599439423d03af1ba2`)
+
+            setNews(response.data.articles)
+        }
+        catch(error){
+            console.log(error)
+        }
+        }
     useEffect(() => {
-        loadNews()
-    }, [])
-    return (
-        <>
-            <h1>News App</h1>
-            <div className="news-container">
-                {
-                    news.map((newsArticle, index) => {
-                        const { author, title, description, url, urlToImage, publishedAt, content } = newsArticle
-                        return (
+            loadNews()
+        }, [])
+        useEffect(() => {
+            loadNews()
+        }, [searchQury])
+        return (
+            <>
+                <h1 className="heading">News App</h1>
+                <input type="text" value={searchQury} onChange={(e) => setSearchQury(e.target.value)}
+               className="searchbar"></input>
+                <div className="news-container">
+                    {
+                        news.map((newsArticle, index) => {
+                            const { author, title, description, url, urlToImage, publishedAt } = newsArticle
+                            return (
 
-                            <NewsArticle author={author} title={title} description=
-                                {description} url={url} urlToImage=
-                                {urlToImage} publishedAt={publishedAt} content={content} key={index} />
+                                <NewsArticle author={author} title={title} description=
+                                    {description} url={url} urlToImage=
+                                    {urlToImage} publishedAt={publishedAt} key={index} />
 
 
-                        )
-                    })
-                }
-            </div>
-        </>
-    )
+                            )
+                        })
+                    }
+                </div>
+            </>
+        )
 
-}
-export default Home
+    }
+    export default Home
